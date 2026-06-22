@@ -5,272 +5,125 @@
 **Netlify Deployment:**
 https://deploy-preview-1--referraldashboard2.netlify.app
 
----
+A secure, responsive, and intuitive referral management system built for Go Business to help users track referrals, earnings, and partner activity through a structured dashboard.
 
-## Project Overview
+This application is built in strict compliance with the project assessment guidelines and the provided React and Web Development syllabus.
 
-Go Business Referral Dashboard is a secure and responsive referral management platform that enables users to manage referral activities, monitor earnings, track service performance, and view detailed partner information through an intuitive dashboard interface.
+## Project Description
 
-The application follows modern React development practices and implements authentication, protected routing, API integration, search, sorting, pagination, and responsive design.
-
----
+The Referral Dashboard is a web application featuring a login gateway with JWT token session management, a secure dashboard displaying key overview metrics, a service summary table, custom share panels for referral link/code distribution, and a searchable, sortable list of referrals. Users can click any referral row to access a dynamic detail view or view a custom 404 page for invalid routes.
 
 ## Features
 
-### Authentication & Authorization
+* **User Authentication**: Secure credentials verification using a REST API. Store JWT inside browser cookies.
+* **Protected Routing**: Restricts the dashboard homepage and details view to logged-in users, while allowing public access to the login and 404 pages.
+* **Overview Metrics**: Summary card grid detailing balances, discount percentages, total earnings, etc., directly pulled from the API.
+* **Service Summary**: Visual breakdown of referred accounts and earnings associated with services.
+* **Share referral panel**: Functional panel featuring quick copy-to-clipboard actions for links and codes.
+* **All Referrals Table**:
 
-* Secure login using API authentication
-* JWT token stored in browser cookies
-* Protected routes for authenticated users
-* Public route protection for login page
-* Automatic redirection based on authentication status
-
-### Dashboard Overview
-
-* Account balance summary
-* Total earnings statistics
-* Discount and commission information
-* Referral performance metrics
-* Real-time dashboard data from API
-
-### Referral Management
-
-* Search referrals by name or service
-* Sort referrals by date (Newest First / Oldest First)
-* Client-side pagination (10 records per page)
-* Dynamic referral statistics
-* Detailed referral information page
-
-### Referral Sharing
-
-* Copy referral links instantly
-* Copy referral codes
-* Quick sharing functionality
-
-### Responsive Design
-
-* Mobile-friendly layout
-* Tablet support
-* Desktop optimization
-* Bootstrap 5 responsive utilities
-* Flexbox and CSS Grid layouts
-
-### Error Handling
-
-* Custom 404 page
-* Invalid route handling
-* Protected route validation
-
----
+  * Dynamic name/service queries.
+  * Sort order customization (newest first / oldest first by date).
+  * Client-side pagination (10 entries per page).
+  * Showing X–Y of Z entries footer summary.
+* **Referral Details**: Dynamic route utilizing URL parameters to fetch and show granular partner records.
+* **Responsive Web Design**: Clean, fluid layout built using Bootstrap 5 utility classes and standard CSS Flexbox/Grid for mobile, tablet, and desktop viewports.
 
 ## Tech Stack
 
-### Frontend
-
-* React 18
-* React Router DOM v6
-* JavaScript (ES6+)
-* Vite
-
-### Styling
-
-* Bootstrap 5
-* CSS3
-* Flexbox
-* CSS Grid
-
-### Authentication
-
-* js-cookie
-
-### API Integration
-
-* Fetch API
-
-### Development Tools
-
-* Vite
-* ESLint
-
----
+* **Core**: React 18 (Functional Components, Hooks, Context, createRoot)
+* **Routing**: React Router DOM 6
+* **Persistence**: js-cookie
+* **Styling**: Bootstrap 5, Vanilla CSS3 (Custom Variables, Transitions)
+* **API requests**: Native Fetch API
+* **Tooling**: Vite, ESLint
 
 ## Folder Structure
 
 ```text
 src/
-├── components/
+├── components/         # Reusable layouts and route guards
 │   ├── ProtectedRoute.jsx
 │   ├── PublicRoute.jsx
 │   ├── Navbar.jsx
 │   └── Footer.jsx
-│
-├── pages/
+├── pages/              # Routed view templates
 │   ├── Login.jsx
 │   ├── Dashboard.jsx
 │   ├── ReferralDetail.jsx
 │   └── NotFound.jsx
-│
-├── services/
+├── services/           # API integration handlers
 │   └── api.js
-│
-├── styles/
+├── styles/             # Application custom CSS
 │   └── app.css
-│
-├── utils/
+├── utils/              # Helper utilities
 │   └── formatters.js
-│
-├── App.jsx
-└── main.jsx
+├── App.jsx             # Route definitions and Router config
+└── main.jsx            # Application mount point
 ```
 
----
+## Installation & Setup
 
-## Installation
-
-Clone the repository:
-
-```bash
-git clone https://github.com/Ammulu321/referralDashboard.git
-```
-
-Navigate to the project directory:
-
-```bash
-cd referralDashboard
-```
-
-Install dependencies:
+1. Clone or extract the project files.
+2. Navigate to the root directory and install dependencies:
 
 ```bash
 npm install
 ```
 
----
+## Run Instructions
 
-## Running Locally
-
-Start the development server:
+Start the local Vite development server:
 
 ```bash
 npm run dev
 ```
 
-Open:
+Open http://localhost:5173 in your browser.
 
-```text
-http://localhost:5173
-```
+## Build Instructions
 
----
-
-## Production Build
-
-Create an optimized production build:
+Compile the application into optimized static assets under the `dist` folder:
 
 ```bash
 npm run build
 ```
-
-Preview the production build locally:
-
-```bash
-npm run preview
-```
-
----
 
 ## Test Credentials
 
-Use the following credentials to access the dashboard:
+To log in and explore the dashboard, use the following credentials:
 
-**Email**
+* **Email**: `admin@example.com`
+* **Password**: `admin123`
 
-```text
-admin@example.com
-```
+## Deployment Instructions
 
-**Password**
+### Netlify Deployment
 
-```text
-admin123
-```
-
----
-
-## Deployment
-
-### Netlify
-
-Build Command:
-
-```bash
-npm run build
-```
-
-Publish Directory:
-
-```text
-dist
-```
-
-Live URL:
-
+**Live URL:**
 https://deploy-preview-1--referraldashboard2.netlify.app
 
----
+### Deploy to Vercel
+
+1. Install the Vercel CLI globally or use the dashboard integration.
+2. Run the deployment command in the project root:
+
+```bash
+vercel
+```
+
+3. Follow the CLI prompt instructions, accepting default settings.
 
 ## Assessment Requirements Covered
 
-### Authentication
+* [x] **React 18 & v6 Router Compatibility**: package.json updated to compatible React 18, React DOM 18, and React Router DOM 6 versions.
+* [x] **BrowserRouter Setup**: App.jsx wraps `<Routes>` in `<BrowserRouter>`. main.jsx only mounts `<App />`.
+* [x] **Auth Cookie Storage**: The JWT token returned from the sign-in API is stored as a cookie named `jwt_token`.
+* [x] **Route Guards**: ProtectedRoute redirects unauthenticated users to `/login`. PublicRoute redirects logged-in users away from `/login`. Wildcard routes are public.
+* [x] **API Filtering & Sorting**: Query parameters (`search` and `sort`) are wired to API requests during text searches and order adjustments.
+* [x] **Client-side Pagination**: Divides the referrals array into pages of 10 rows. Integrates disabled state triggers on boundary pages and standard X–Y of Z format using the en-dash (`–`).
+* [x] **Date Conversion**: Parses ISO dates (`YYYY-MM-DD`) and displays them as `YYYY/MM/DD`.
+* [x] **USD Currency Formatting**: Configured the `Intl.NumberFormat` formatter to format profit values in USD (`$1,234` style) without decimals.
+* [x] **Semantic Structure**: Uses standard semantic HTML5 elements like `<header>`, `<footer>`, `<main>`, `<nav>`, `<section>`, and `<dl>` for accessibility support.
 
-* JWT token stored in cookies
-* Protected routes implemented
-* Public route handling implemented
-
-### Routing
-
-* React Router DOM v6
-* Dynamic route parameters
-* Custom 404 page
-
-### API Integration
-
-* Login API integration
-* Dashboard API integration
-* Referral details API integration
-
-### Data Handling
-
-* Search functionality
-* Sorting functionality
-* Pagination functionality
-* Date formatting
-* Currency formatting
-
-### UI & Accessibility
-
-* Semantic HTML structure
-* Responsive design
-* Accessible navigation
-
-### React Best Practices
-
-* Functional Components
-* React Hooks
-* Reusable Components
-* Route Guards
-* Modular Architecture
-
----
-
-## Author
-
-**Yoshitha Jammu**
-
-B.Tech Computer Science & Engineering (2025)
-
----
-
-## Project Status
-
-Completed and deployed successfully on Netlify.
+#
