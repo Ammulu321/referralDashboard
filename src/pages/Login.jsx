@@ -3,9 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { signIn } from '../services/api';
 
-/**
- * Public Login Page Component
- */
+
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -19,21 +17,17 @@ const Login = () => {
     setLoading(true);
 
     try {
-      // POST payload is always sent on submit
       const response = await signIn(email, password);
       // Success Response contains: responseJson.data.token
       const token = response?.data?.token;
       
       if (token) {
-        // Save the JWT token in jwt_token cookie
         Cookies.set('jwt_token', token);
-        // Navigate user to protected dashboard home /
         navigate('/', { replace: true });
       } else {
         setError('Token not found in response.');
       }
     } catch (err) {
-      // Display backend error response message e.g. "Invalid email or password"
       setError(err.message || 'Invalid email or password');
     } finally {
       setLoading(false);
@@ -43,11 +37,9 @@ const Login = () => {
   return (
     <div className="login-wrapper">
       <div className="login-card">
-        {/* Brand details */}
         <h1 className="login-brand">Go Business</h1>
         <p className="login-tagline">Sign in to open your referral dashboard.</p>
         
-        {/* Error alerting region */}
         {error && (
           <div className="error-alert" role="alert">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
@@ -58,7 +50,6 @@ const Login = () => {
           </div>
         )}
         
-        {/* Form controls */}
         <form onSubmit={handleSubmit} noValidate>
           <div className="form-floating-custom">
             <label htmlFor="emailInput">Email</label>
@@ -86,7 +77,6 @@ const Login = () => {
             />
           </div>
           
-          {/* Button remains enabled regardless of inputs being empty */}
           <button
             type="submit"
             className="btn-primary-custom d-flex justify-content-center align-items-center gap-2"

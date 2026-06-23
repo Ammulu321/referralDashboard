@@ -6,10 +6,7 @@ import Dashboard from './pages/Dashboard';
 import ReferralDetail from './pages/ReferralDetail';
 import NotFound from './pages/NotFound';
 
-/**
- * Main Application Component containing routes.
- * The Routes are wrapped in BrowserRouter inside App.jsx as required.
- */
+
 function App() {
   return (
     <BrowserRouter>
@@ -43,7 +40,6 @@ function App() {
           } 
         />
 
-        {/* Optional Redirect to Dashboard */}
         <Route 
           path="/dashboard/referrals" 
           element={
@@ -53,7 +49,6 @@ function App() {
           } 
         />
 
-        {/* Catch-all Not Found Route (Public, NOT wrapped in ProtectedRoute) */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

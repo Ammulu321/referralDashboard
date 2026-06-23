@@ -16,6 +16,7 @@ const Dashboard = () => {
   
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
   
   const [searchText, setSearchText] = useState('');
   const [sortByDate, setSortByDate] = useState('desc');
@@ -38,6 +39,7 @@ const Dashboard = () => {
       setReferralsList(parsedData.referrals || []);
       
       setCurrentPage(1);
+      setIsInitialLoad(false);
     } catch (err) {
       setError(err.message || 'Failed to fetch dashboard data.');
     } finally {
@@ -103,7 +105,6 @@ const Dashboard = () => {
       <Navbar />
 
       <main className="container my-4 py-2">
-        {/* Header Section */}
         <div className="mb-4">
           <h1 className="h2 mb-1">Referral Dashboard</h1>
           <p className="text-muted mb-0">
@@ -111,7 +112,7 @@ const Dashboard = () => {
           </p>
         </div>
 
-        {error && (
+        {isInitialLoad && error && (
           <div className="alert-error-custom" role="alert">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" className="flex-shrink-0 mt-0.5">
               <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -124,7 +125,7 @@ const Dashboard = () => {
           </div>
         )}
 
-        {loading && (
+        {isInitialLoad && loading && (
           <div className="loading-container">
             <div className="spinner-custom" role="status">
               <span className="visually-hidden">Loading dashboard data...</span>
@@ -133,11 +134,24 @@ const Dashboard = () => {
           </div>
         )}
 
-        {!loading && !error && (
+        {!isInitialLoad && (
           <>
+            {!isInitialLoad && error && (
+              <div className="alert-error-custom mb-4" role="alert">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" className="flex-shrink-0 mt-0.5">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                  <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z"/>
+                </svg>
+                <div>
+                  <h6 className="fw-bold mb-1">Data Fetch Failure</h6>
+                  <span>{error}</span>
+                </div>
+              </div>
+            )}
+
             <section className="mb-4" role="region" aria-label="Overview metrics">
               <h2 className="h5 mb-3">Overview</h2>
-              <div className="metrics-grid">
+              <div className={`metrics-grid dashboard-card-transition ${loading ? 'updating' : ''}`}>
                 {metrics.map((metric) => (
                   <div key={metric.id || metric.label} className="metric-card">
                     <span className="metric-label">{metric.label}</span>
@@ -150,7 +164,7 @@ const Dashboard = () => {
             <div className="row g-4 mb-4">
               <div className="col-12 col-lg-6">
                 <section role="region" aria-label="Service summary" className="h-100">
-                  <div className="card-custom h-100">
+                  <div className={`card-custom h-100 dashboard-card-transition ${loading ? 'updating' : ''}`}>
                     <div className="card-custom-header">
                       <h2 className="h5 mb-0">Service summary</h2>
                     </div>
@@ -255,9 +269,15 @@ const Dashboard = () => {
                   <div className="d-flex flex-column flex-md-row align-items-stretch align-items-md-center gap-3 w-100 w-md-auto">
                     
                     <div className="search-input-group">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" className="search-icon-svg">
-                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-                      </svg>
+                      {loading ? (
+                        <div className="search-loading-spinner" role="status">
+                          <span className="visually-hidden">Loading...</span>
+                        </div>
+                      ) : (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" className="search-icon-svg">
+                          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                        </svg>
+                      )}
                       <input
                         type="text"
                         className="form-control-custom py-1.5"
@@ -284,7 +304,7 @@ const Dashboard = () => {
                   </div>
                 </div>
 
-                <div className="card-custom-body pt-3">
+                <div className={`card-custom-body pt-3 dashboard-card-transition ${loading ? 'updating' : ''}`}>
                   <div className="table-responsive-custom">
                     <table className="table table-custom table-hover">
                       <thead>

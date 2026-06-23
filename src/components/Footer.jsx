@@ -3,7 +3,6 @@ const Footer = () => {
     <footer className="footer-custom mt-auto">
       <div className="container">
         <div className="row align-items-center justify-content-between">
-          {/* Brand section */}
           <div className="col-12 col-md-4 text-center text-md-start mb-2 mb-md-0">
             <span className="footer-brand">Go Business</span>
           </div>

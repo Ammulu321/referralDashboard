@@ -6,9 +6,6 @@ import Footer from '../components/Footer';
 import { getReferrals } from '../services/api';
 import { formatDate, formatProfit } from '../utils/formatters';
 
-/**
- * Protected Referral Detail Page Component
- */
 const ReferralDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -37,17 +34,14 @@ const ReferralDetail = () => {
         let matchedReferral = null;
         
         if (parsedData) {
-          // Case 1: The response itself is the referral row object
           if (parsedData.id !== undefined && String(parsedData.id) === String(id)) {
             matchedReferral = parsedData;
           } 
-          // Case 2: The response is nested under a referrals list array
           else if (Array.isArray(parsedData.referrals)) {
             matchedReferral = parsedData.referrals.find(
               (r) => String(r.id) === String(id)
             );
           }
-          // Case 3: Single nested referral object
           else if (parsedData.referral && String(parsedData.referral.id) === String(id)) {
             matchedReferral = parsedData.referral;
           }
@@ -59,7 +53,6 @@ const ReferralDetail = () => {
           setNotFound(true);
         }
       } catch (err) {
-        // If API returns 404 or bad request, treat as not found
         if (err.message && err.message.includes('404')) {
           setNotFound(true);
         } else {
@@ -78,14 +71,12 @@ const ReferralDetail = () => {
       <Navbar />
 
       <main className="container my-4 py-2">
-        {/* Navigation Link back */}
         <div className="mb-3">
           <Link to="/" className="back-link" aria-label="Back to dashboard">
             &larr; Back to dashboard
           </Link>
         </div>
 
-        {/* Loading Spinner */}
         {loading && (
           <div className="loading-container">
             <div className="spinner-custom" role="status">
@@ -95,7 +86,6 @@ const ReferralDetail = () => {
           </div>
         )}
 
-        {/* Error State */}
         {!loading && error && (
           <div className="alert-error-custom" role="alert">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" className="flex-shrink-0 mt-0.5">
@@ -109,7 +99,6 @@ const ReferralDetail = () => {
           </div>
         )}
 
-        {/* Not Found Screen */}
         {!loading && notFound && (
           <div className="text-center py-5">
             <h1 className="h3 mb-3">Referral not found</h1>
@@ -120,7 +109,6 @@ const ReferralDetail = () => {
           </div>
         )}
 
-        {/* Data Display Details Card */}
         {!loading && !error && !notFound && referral && (
           <div className="card-custom max-width-800 mx-auto">
             <div className="card-custom-header">

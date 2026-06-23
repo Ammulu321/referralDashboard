@@ -1,4 +1,4 @@
-/* Go Business - Custom Premium Styling System */
+
 
 :root {
   --primary-color: #4f46e5;
@@ -22,7 +22,6 @@
   --transition-normal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Global Styles */
 body {
   font-family: var(--font-family);
   background-color: var(--bg-main);
@@ -46,7 +45,6 @@ main {
   flex: 1;
 }
 
-/* Typography & Links */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   color: var(--text-dark);
@@ -63,20 +61,17 @@ a:hover {
   color: var(--primary-hover);
 }
 
-/* Custom Accessibility Outline */
 *:focus-visible {
   outline: 2px solid var(--primary-color);
   outline-offset: 2px;
 }
 
-/* Layout Elements */
 .app-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-/* Navbar Premium Design */
 .navbar-custom {
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(12px);
@@ -129,7 +124,6 @@ a:hover {
   background-color: var(--danger-color);
 }
 
-/* Footer Design */
 .footer-custom {
   background-color: #fff;
   border-top: 1px solid var(--border-color);
@@ -153,7 +147,6 @@ a:hover {
   color: var(--primary-color);
 }
 
-/* Card Improvements */
 .card-custom {
   background-color: var(--bg-card);
   border: 1px solid var(--border-color);
@@ -181,7 +174,6 @@ a:hover {
   padding: 1.5rem;
 }
 
-/* Login Page Layout */
 .login-wrapper {
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
   display: flex;
@@ -281,7 +273,6 @@ a:hover {
   gap: 0.5rem;
 }
 
-/* Metric Cards */
 .metrics-grid {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
@@ -335,7 +326,6 @@ a:hover {
   line-height: 1;
 }
 
-/* Share Panel Custom Styles */
 .share-container {
   display: grid;
   grid-template-columns: 1fr;
@@ -414,7 +404,6 @@ a:hover {
   100% { opacity: 0; transform: translateY(-5px); }
 }
 
-/* Custom Table Styles */
 .table-responsive-custom {
   border-radius: 0.5rem;
   border: 1px solid var(--border-color);
@@ -460,7 +449,6 @@ a:hover {
   color: var(--text-light);
 }
 
-/* Filter Controls Layout */
 .filter-bar {
   display: flex;
   flex-direction: column;
@@ -514,7 +502,6 @@ a:hover {
   font-weight: 500;
 }
 
-/* Pagination Styles */
 .pagination-container {
   display: flex;
   flex-direction: column;
@@ -582,7 +569,6 @@ a:hover {
   cursor: not-allowed;
 }
 
-/* Loading & Alert State */
 .loading-container {
   display: flex;
   flex-direction: column;
@@ -617,8 +603,6 @@ a:hover {
   margin-bottom: 2rem;
   font-weight: 500;
 }
-
-/* Referral Details UI */
 .detail-header {
   margin-bottom: 2rem;
 }
@@ -688,7 +672,6 @@ a:hover {
   font-size: 1rem;
 }
 
-/* 404 Page Design */
 .not-found-wrapper {
   background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
   display: flex;
@@ -722,3 +705,27 @@ a:hover {
   max-width: 480px;
   margin: 0 auto 2rem auto;
 }
+
+.dashboard-card-transition {
+  transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dashboard-card-transition.updating {
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+.search-loading-spinner {
+  position: absolute;
+  left: 0.875rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid var(--primary-light);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  pointer-events: none;
+}
+
